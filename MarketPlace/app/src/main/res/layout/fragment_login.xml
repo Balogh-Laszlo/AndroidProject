@@ -21,12 +21,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="40dp"
         android:textColorHint="@color/hintColor"
+        app:boxBackgroundMode="filled"
         app:boxStrokeColor="@color/loginTextColor1"
         app:hintTextColor="@color/loginTextColor1"
         app:layout_constraintEnd_toEndOf="parent"
