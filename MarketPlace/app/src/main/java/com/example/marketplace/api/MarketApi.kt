@@ -1,9 +1,7 @@
 package com.example.marketplace.api
 
 import android.provider.SyncStateContract
-import com.example.marketplace.model.LoginRequest
-import com.example.marketplace.model.LoginResponse
-import com.example.marketplace.model.ProductResponse
+import com.example.marketplace.model.*
 import com.example.marketplace.utils.Constants
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,4 +14,7 @@ interface MarketApi {
 
     @GET(Constants.GET_PRODUCT_URL)
     suspend fun getProducts(@Header("token") token: String): ProductResponse
+
+    @POST(Constants.REGISTER_URL)
+    suspend fun register(@Body request: RegisterRequest): RegisterResponse
 }

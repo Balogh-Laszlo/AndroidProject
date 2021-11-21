@@ -9,7 +9,7 @@ import com.example.marketplace.model.LoginRequest
 import com.example.marketplace.model.User
 import com.example.marketplace.repository.Repository
 
-class LoginViewModel(val context: Context, val repository: Repository) : ViewModel() {
+class LoginViewModel(val context: Context, private val repository: Repository) : ViewModel() {
     var token: MutableLiveData<String> = MutableLiveData()
     var user = MutableLiveData<User>()
 
@@ -24,7 +24,7 @@ class LoginViewModel(val context: Context, val repository: Repository) : ViewMod
             token.value = result.token
             Log.d("xxx", "MyApplication - token:  ${MyApplication.token}")
         } catch (e: Exception) {
-            Log.d("xxx", "LoginViewModel - exception: ${e.toString()}")
+            Log.d("xxx", "LoginViewModel - exception: $e")
         }
     }
 }
