@@ -22,4 +22,5 @@
     <string name="my_market">My market</string>
     <string name="my_fares">My fares</string>
     <string name="latest">Latest</string>
+    <string name="order_now">Order now</string>
 </resources>
