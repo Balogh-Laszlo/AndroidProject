@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/timelineFragment">
+
+    <fragment
+        android:id="@+id/timelineFragment"
+        android:name="com.example.marketplace.fragments.TimelineFragment"
+        android:label="fragment_timeline"
+        tools:layout="@layout/fragment_timeline" >
+        <action
+            android:id="@+id/action_timelineFragment_to_myFaresFragment"
+            app:destination="@id/myFaresFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_myMarketFragment"
+            app:destination="@id/myMarketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myMarketFragment"
+        android:name="com.example.marketplace.MyMarketFragment"
+        android:label="fragment_my_market"
+        tools:layout="@layout/fragment_my_market" >
+        <action
+            android:id="@+id/action_myMarketFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment" />
+        <action
+            android:id="@+id/action_myMarketFragment_to_myFaresFragment"
+            app:destination="@id/myFaresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myFaresFragment"
+        android:name="com.example.marketplace.MyFaresFragment"
+        android:label="fragment_my_fares"
+        tools:layout="@layout/fragment_my_fares" >
+        <action
+            android:id="@+id/action_myFaresFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment" />
+        <action
+            android:id="@+id/action_myFaresFragment_to_timelineFragment2"
+            app:destination="@id/timelineFragment" />
+        <action
+            android:id="@+id/action_myFaresFragment_to_myMarketFragment"
+            app:destination="@id/myMarketFragment" />
+    </fragment>
+</navigation>
