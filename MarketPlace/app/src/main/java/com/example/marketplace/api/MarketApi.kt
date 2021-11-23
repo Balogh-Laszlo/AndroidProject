@@ -17,4 +17,10 @@ interface MarketApi {
 
     @POST(Constants.REGISTER_URL)
     suspend fun register(@Body request: RegisterRequest): RegisterResponse
+
+    @GET(Constants.REFRESH_TOKEN_URL)
+    suspend fun refreshToken(@Header("token") token:String) :RefreshTokenResponse
+
+    @POST(Constants.RESET_PASSWORD)
+    suspend fun resetPassword(@Body request:ResetPasswordRequest) :ResetPasswordResponse
 }

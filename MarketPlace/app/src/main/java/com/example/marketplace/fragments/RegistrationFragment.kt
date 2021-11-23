@@ -54,6 +54,13 @@ class RegistrationFragment : Fragment() {
         registerListeners()
         registerViewModel.code.observe(viewLifecycleOwner){
             Log.d(TAG,"registration code: ${registerViewModel.code}")
+            if (registerViewModel.code.value == 200){
+                Toast.makeText(requireContext(),registerViewModel.message,Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+            }
+            else{
+                Toast.makeText(requireContext(),registerViewModel.message,Toast.LENGTH_SHORT).show()
+            }
         }
         return view
     }
@@ -66,6 +73,10 @@ class RegistrationFragment : Fragment() {
         btnRegister.setOnClickListener {
             val isOK = validateData()
             if (isOK) {
+                registerViewModel.user.value!!.email = email
+                registerViewModel.user.value!!.username = userName
+                registerViewModel.user.value!!.password = password
+                registerViewModel.user.value!!.phone_number = phoneNumber
                 register()
             }
         }

@@ -2,7 +2,9 @@ package com.example.marketplace.model
 
 import com.squareup.moshi.JsonClass
 
-data class User(var username: String="", var password: String="", val email: String="", var phone_number: String="")
+data class User(var username: String="", var password: String="", var email: String="", var phone_number: String="")
+
+data class Reset(var username: String="", var email: String="")
 
 @JsonClass(generateAdapter = true)
 data class LoginRequest (
@@ -32,4 +34,21 @@ data class RegisterResponse(
     var code:Int,
     var message:String,
     var creation_time: Long
+)
+@JsonClass(generateAdapter = true)
+data class RefreshTokenResponse(
+    val token: String,
+    val creation_time: Long,
+    val refresh_time: Long
+)
+@JsonClass(generateAdapter = true)
+data class ResetPasswordRequest(
+    val username: String,
+    val email: String
+)
+@JsonClass(generateAdapter = true)
+data class ResetPasswordResponse(
+    val code: Int,
+    val message: String,
+    val timestamp:Long
 )

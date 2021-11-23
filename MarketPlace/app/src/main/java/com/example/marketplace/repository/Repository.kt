@@ -14,4 +14,10 @@ class Repository {
     suspend fun register(request: RegisterRequest): RegisterResponse {
         return RetrofitInstance.api.register(request)
     }
+    suspend fun refreshToken(token:String) : RefreshTokenResponse{
+        return RetrofitInstance.api.refreshToken(token)
+    }
+    suspend fun resetPassword(request:ResetPasswordRequest) :ResetPasswordResponse{
+        return RetrofitInstance.api.resetPassword(request)
+    }
 }

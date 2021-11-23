@@ -11,6 +11,7 @@ import com.example.marketplace.repository.Repository
 class RegisterViewModel(val context: Context, private val repository: Repository) : ViewModel() {
     var user = MutableLiveData<User>()
     var code = MutableLiveData<Int>()
+    var message =""
 
     init {
         user.value = User()
@@ -20,6 +21,7 @@ class RegisterViewModel(val context: Context, private val repository: Repository
         try {
             val result = repository.register(request)
             code.value = result.code
+            message = result.message
 
         }catch (e: Exception) {
             Log.d("xxx", "RegisterViewModel - exception: $e")
