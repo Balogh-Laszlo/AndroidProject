@@ -63,6 +63,10 @@ class LoginFragment : Fragment() {
             }
             refreshTokenViewModel.token.observe(viewLifecycleOwner){
                 MyApplication.token = refreshTokenViewModel.token.value.toString()
+                val preferences = requireContext().getSharedPreferences("token", MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putString("token",MyApplication.token)
+                editor.apply()
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
             }

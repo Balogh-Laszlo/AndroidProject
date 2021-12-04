@@ -43,6 +43,11 @@ class ProductListAdapter(
                     .into(ivProductImage)
             }
             else{
+                Glide.with(context)
+                    .load(R.drawable.product)
+                    .override(200)
+                    .circleCrop()
+                    .into(ivProductImage)
             }
         }
 
@@ -63,7 +68,7 @@ class ProductListAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    fun setData(newList: ArrayList<Product>){
+    fun setData(newList: List<Product>){
         list = newList
     }
 

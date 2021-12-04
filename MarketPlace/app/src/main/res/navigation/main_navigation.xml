@@ -16,10 +16,13 @@
         <action
             android:id="@+id/action_timelineFragment_to_myMarketFragment"
             app:destination="@id/myMarketFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_productDetailByCostumer"
+            app:destination="@id/productDetailByCostumer" />
     </fragment>
     <fragment
         android:id="@+id/myMarketFragment"
-        android:name="com.example.marketplace.MyMarketFragment"
+        android:name="com.example.marketplace.fragments.MyMarketFragment"
         android:label="fragment_my_market"
         tools:layout="@layout/fragment_my_market" >
         <action
@@ -44,4 +47,9 @@
             android:id="@+id/action_myFaresFragment_to_myMarketFragment"
             app:destination="@id/myMarketFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productDetailByCostumer"
+        android:name="com.example.marketplace.fragments.ProductDetailByCostumer"
+        android:label="fragment_product_detail_by_costumer"
+        tools:layout="@layout/fragment_product_detail_by_costumer" />
 </navigation>

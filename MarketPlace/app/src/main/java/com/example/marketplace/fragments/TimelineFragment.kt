@@ -2,38 +2,45 @@ package com.example.marketplace.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Switch
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marketplace.ProductListAdapter
 import com.example.marketplace.R
 import com.example.marketplace.model.Product
+import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
 import com.example.marketplace.viewmodels.ListViewModel
 import com.example.marketplace.viewmodels.ListViewModelFactory
 import kotlinx.coroutines.launch
 
 
-class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener {
+class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
+    AdapterView.OnItemSelectedListener {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var swLatest:Switch
     private lateinit var spOrder:Spinner
     lateinit var listViewModel:ListViewModel
     private lateinit var rvAdapter: ProductListAdapter
     private lateinit var rvList: RecyclerView
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val factory = ListViewModelFactory(Repository())
-        listViewModel = ViewModelProvider(this,factory).get(ListViewModel::class.java)
+        listViewModel = ViewModelProvider(requireActivity(),factory).get(ListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -59,6 +66,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener {
             rvAdapter.setData(listViewModel.products.value as ArrayList<Product>)
             rvAdapter.notifyDataSetChanged()
         }
+        spOrder.onItemSelectedListener = this
         return view
     }
 
@@ -75,6 +83,45 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener {
 
     }
     override fun onItemClick(position:Int){
+        sharedViewModel.currentProduct = listViewModel.products.value!![position]
+        findNavController().navigate(R.id.action_timelineFragment_to_productDetailByCostumer)
+    }
 
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        if(listViewModel.products.value!=null) {
+            Log.d("TIMELINE",spOrder.selectedItem.toString())
+            when (spOrder.selectedItem.toString()) {
+                "Seller" -> {
+                    listViewModel.products.value!!.sortBy {
+                        it.username
+                    }
+                    rvAdapter.setData(listViewModel.products.value!!)
+                    rvAdapter.notifyDataSetChanged()
+                }
+                "Product" -> {
+                    listViewModel.products.value!!.sortBy {
+                        it.title
+                    }
+                    rvAdapter.setData(listViewModel.products.value!!)
+                    rvAdapter.notifyDataSetChanged()
+                }
+                else -> {
+                    listViewModel.products.value!!.sortByDescending {
+                        it.creation_time
+                    }
+                    rvAdapter.setData(listViewModel.products.value!!)
+                    rvAdapter.notifyDataSetChanged()
+
+                }
+            }
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        listViewModel.products.value!!.sortByDescending {
+            it.creation_time
+        }
+        rvAdapter.setData(listViewModel.products.value!!)
+        rvAdapter.notifyDataSetChanged()
     }
 }

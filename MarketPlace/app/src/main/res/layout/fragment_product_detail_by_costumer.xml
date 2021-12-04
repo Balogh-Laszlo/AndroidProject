@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProductDetailByCostumer">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpImagesCustomer"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivProfileDetailCostumer"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/avdefault_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesCustomer" />
+
+        <TextView
+            android:id="@+id/tvSellerNameDeetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            app:layout_constraintStart_toEndOf="@+id/ivProfileDetailCostumer"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesCustomer" />
+
+        <TextView
+            android:id="@+id/tvDateDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesCustomer" />
+
+        <TextView
+            android:id="@+id/tvProductTitleDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfileDetailCostumer" />
+
+        <TextView
+            android:id="@+id/tvPriceDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductTitleDetailCostumer" />
+
+        <TextView
+            android:id="@+id/tvProductStateDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="@color/loginTextColor1"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateDetailCostumer" />
+
+        <ImageView
+            android:id="@+id/ivIsActive"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/product"
+            app:layout_constraintEnd_toStartOf="@+id/tvProductStateDetailCostumer"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateDetailCostumer" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/available_amount"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetailCostumer" />
+
+        <TextView
+            android:id="@+id/tvAmountDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text View"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetailCostumer" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/rate_this_fare_click_on_the_stars_above"
+            android:textColor="@color/hintColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/tvProductDescriptionDetailCostumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <ImageView
+            android:id="@+id/ivMailDetails"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_no_border_style"
+            android:padding="10dp"
+            android:src="@drawable/mail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDescriptionDetailCostumer" />
+
+        <ImageView
+            android:id="@+id/ivOrderDetails"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_no_border_blue_style"
+            android:padding="10dp"
+            android:src="@drawable/my_market"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivPhoneDetails"
+            app:layout_constraintStart_toEndOf="@+id/ivMailDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDescriptionDetailCostumer" />
+
+        <ImageView
+            android:id="@+id/ivPhoneDetails"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="72dp"
+            android:background="@drawable/round_no_border_style"
+            android:padding="10dp"
+            android:src="@drawable/phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDescriptionDetailCostumer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

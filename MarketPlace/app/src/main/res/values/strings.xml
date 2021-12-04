@@ -23,4 +23,6 @@
     <string name="my_fares">My fares</string>
     <string name="latest">Latest</string>
     <string name="order_now">Order now</string>
+    <string name="available_amount">Available amount: </string>
+    <string name="rate_this_fare_click_on_the_stars_above">Rate this fare, click on the stars above</string>
 </resources>

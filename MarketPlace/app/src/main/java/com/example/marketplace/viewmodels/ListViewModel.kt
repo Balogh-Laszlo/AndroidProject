@@ -10,7 +10,7 @@ import com.example.marketplace.repository.Repository
 import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: Repository) : ViewModel() {
-    var products: MutableLiveData<List<Product>> = MutableLiveData()
+    var products: MutableLiveData<MutableList<Product>> = MutableLiveData()
 
     init{
         Log.d("xxx", "ListViewModel constructor - Token: ${MyApplication.token}")
@@ -22,7 +22,7 @@ class ListViewModel(private val repository: Repository) : ViewModel() {
             try {
                 val result =
                     repository.getProducts(MyApplication.token)
-                products.value = result.products
+                products.value = result.products as MutableList<Product>
                 Log.d("xxx", "ListViewModel - #products:  ${result.item_count}")
             }catch(e: Exception){
                 Log.d("xxx", "ListViewModel exception: ${e.toString()}")
