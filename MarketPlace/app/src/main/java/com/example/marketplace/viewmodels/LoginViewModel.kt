@@ -22,7 +22,9 @@ class LoginViewModel(val context: Context, private val repository: Repository) :
             val result = repository.login(request)
             MyApplication.token = result.token
             token.value = result.token
+            MyApplication.username = user.value!!.username
             Log.d("xxx", "MyApplication - token:  ${MyApplication.token}")
+            Log.d("xxx","username:${MyApplication.username}")
         } catch (e: Exception) {
             Log.d("xxx", "LoginViewModel - exception: $e")
         }

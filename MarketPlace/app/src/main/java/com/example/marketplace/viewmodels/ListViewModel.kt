@@ -21,11 +21,11 @@ class ListViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val result =
-                    repository.getProducts(MyApplication.token)
+                    repository.getProducts(MyApplication.token,100)
                 products.value = result.products as MutableList<Product>
                 Log.d("xxx", "ListViewModel - #products:  ${result.item_count}")
             }catch(e: Exception){
-                Log.d("xxx", "ListViewModel exception: ${e.toString()}")
+                Log.d("xxx", "ListViewModel exception: $e")
             }
         }
     }

@@ -1,17 +1,15 @@
-package com.example.marketplace
+package com.example.marketplace.adapters
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.marketplace.R
 import com.example.marketplace.model.Image
-import java.io.File
 
-class ProductImageAdapter(val context: Context,val images: List<Image>) :
+class ProductImageAdapter(val context: Context,private val images: List<Image>) :
     RecyclerView.Adapter<ProductImageAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView){

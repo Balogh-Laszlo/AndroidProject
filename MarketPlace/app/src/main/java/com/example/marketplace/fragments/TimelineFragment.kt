@@ -18,7 +18,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marketplace.ProductListAdapter
+import com.example.marketplace.MyApplication
+import com.example.marketplace.adapters.ProductListAdapter
 import com.example.marketplace.R
 import com.example.marketplace.model.Product
 import com.example.marketplace.model.SharedViewModel
@@ -48,6 +49,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.d("xxx",MyApplication.username)
         val view = inflater.inflate(R.layout.fragment_timeline, container, false)
         initialize(view)
         lifecycleScope.launch {
@@ -65,6 +67,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         listViewModel.products.observe(viewLifecycleOwner){
             rvAdapter.setData(listViewModel.products.value as ArrayList<Product>)
             rvAdapter.notifyDataSetChanged()
+            sharedViewModel.productList = listViewModel.products.value
         }
         spOrder.onItemSelectedListener = this
         return view

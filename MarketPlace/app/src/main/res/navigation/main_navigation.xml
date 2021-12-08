@@ -31,6 +31,12 @@
         <action
             android:id="@+id/action_myMarketFragment_to_myFaresFragment"
             app:destination="@id/myFaresFragment" />
+        <action
+            android:id="@+id/action_myMarketFragment_to_addNewProductFragment"
+            app:destination="@id/addNewProductFragment" />
+        <action
+            android:id="@+id/action_myMarketFragment_to_productDetailsByOwnerFragment"
+            app:destination="@id/productDetailsByOwnerFragment" />
     </fragment>
     <fragment
         android:id="@+id/myFaresFragment"
@@ -52,4 +58,14 @@
         android:name="com.example.marketplace.fragments.ProductDetailByCostumer"
         android:label="fragment_product_detail_by_costumer"
         tools:layout="@layout/fragment_product_detail_by_costumer" />
+    <fragment
+        android:id="@+id/addNewProductFragment"
+        android:name="com.example.marketplace.fragments.AddNewProductFragment"
+        android:label="fragment_add_new_product"
+        tools:layout="@layout/fragment_add_new_product" />
+    <fragment
+        android:id="@+id/productDetailsByOwnerFragment"
+        android:name="com.example.marketplace.ProductDetailsByOwnerFragment"
+        android:label="fragment_product_details_by_owner"
+        tools:layout="@layout/fragment_product_details_by_owner" />
 </navigation>

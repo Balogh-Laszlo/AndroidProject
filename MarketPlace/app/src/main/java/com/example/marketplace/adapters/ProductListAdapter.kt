@@ -1,4 +1,4 @@
-package com.example.marketplace
+package com.example.marketplace.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,12 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.marketplace.R
 import com.example.marketplace.model.Product
 
 class ProductListAdapter(
     private val context:Context,
     private var list:List<Product>,
-    private val listener:OnItemClickListener)
+    private val listener: OnItemClickListener
+)
     :RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
 {
     interface OnItemClickListener{
@@ -35,7 +37,7 @@ class ProductListAdapter(
             tvSellerName.text = currentItem.username
             tvProductName.text = currentItem.title
             val images = currentItem.images
-            if(images != null && images.isNotEmpty()){
+            if(images.isNotEmpty()){
                 Glide.with(context)
                     .load(images[0].image_path)
                     .override(200)

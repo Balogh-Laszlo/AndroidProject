@@ -13,7 +13,7 @@ interface MarketApi {
     suspend fun login(@Body request: LoginRequest): LoginResponse
 
     @GET(Constants.GET_PRODUCT_URL)
-    suspend fun getProducts(@Header("token") token: String): ProductResponse
+    suspend fun getProducts(@Header("token") token: String, @Header("limit")limit:Int): ProductResponse
 
     @POST(Constants.REGISTER_URL)
     suspend fun register(@Body request: RegisterRequest): RegisterResponse
@@ -23,4 +23,8 @@ interface MarketApi {
 
     @POST(Constants.RESET_PASSWORD)
     suspend fun resetPassword(@Body request:ResetPasswordRequest) :ResetPasswordResponse
+
+    @POST(Constants.ADD_PRODUCT_URL)
+    suspend fun addProduct(@Body request: AddProductRequest,@Header("token") token:String):Product
+
 }

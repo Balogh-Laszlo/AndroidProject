@@ -8,8 +8,8 @@ class Repository {
         return RetrofitInstance.api.login(request)
     }
 
-    suspend fun getProducts(token: String): ProductResponse {
-        return RetrofitInstance.api.getProducts(token)
+    suspend fun getProducts(token: String, limit:Int): ProductResponse {
+        return RetrofitInstance.api.getProducts(token,limit)
     }
     suspend fun register(request: RegisterRequest): RegisterResponse {
         return RetrofitInstance.api.register(request)
@@ -20,4 +20,8 @@ class Repository {
     suspend fun resetPassword(request:ResetPasswordRequest) :ResetPasswordResponse{
         return RetrofitInstance.api.resetPassword(request)
     }
+    suspend fun addProduct(request:AddProductRequest,token: String): Product{
+        return RetrofitInstance.api.addProduct(request,token)
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.example.marketplace.fragments
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,9 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.marketplace.ProductImageAdapter
+import com.example.marketplace.adapters.ProductImageAdapter
 import com.example.marketplace.R
-import com.example.marketplace.model.Image
 import com.example.marketplace.model.SharedViewModel
 import java.sql.Date
 import java.sql.Timestamp
@@ -33,7 +31,7 @@ class ProductDetailByCostumer : Fragment() {
     private lateinit var tvProductDescription: TextView
     private lateinit var ivMail: ImageView
 
-    val sharedViewModel: SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

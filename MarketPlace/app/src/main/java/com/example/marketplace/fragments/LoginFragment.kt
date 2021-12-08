@@ -2,7 +2,6 @@ package com.example.marketplace.fragments
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -53,9 +52,11 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         val preferences = requireContext().getSharedPreferences("token",MODE_PRIVATE)
-        var token = preferences.getString("token","")
+        val preferences2 = requireContext().getSharedPreferences("username", MODE_PRIVATE)
+        val token = preferences.getString("token","")
+        val username = preferences2.getString("username","")
 
-        if(token != null && token.isNotEmpty()) {
+        if(token != null && token.isNotEmpty() && username != null && username.isNotEmpty()) {
             val factory2 = RefreshTokenViewModelFactory(Repository(), token)
             refreshTokenViewModel = ViewModelProvider(this,factory2)[RefreshTokenViewModel::class.java]
             lifecycleScope.launch {
@@ -63,6 +64,7 @@ class LoginFragment : Fragment() {
             }
             refreshTokenViewModel.token.observe(viewLifecycleOwner){
                 MyApplication.token = refreshTokenViewModel.token.value.toString()
+                MyApplication.username = username
                 val preferences = requireContext().getSharedPreferences("token", MODE_PRIVATE)
                 val editor = preferences.edit()
                 editor.putString("token",MyApplication.token)
@@ -79,6 +81,12 @@ class LoginFragment : Fragment() {
             val editor = preferences.edit()
             editor.putString("token",loginViewModel.token.value)
             editor.apply()
+            val preferences2 = requireContext().getSharedPreferences("username", MODE_PRIVATE)
+            val editor2 = preferences2.edit()
+            Log.d("xxx","username:${MyApplication.username}")
+            Log.d(TAG,MyApplication.username)
+            editor2.putString("username",loginViewModel.user.value!!.username)
+            editor2.apply()
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
         }
