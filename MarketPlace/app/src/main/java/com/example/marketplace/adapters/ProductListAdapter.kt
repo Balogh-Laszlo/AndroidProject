@@ -1,5 +1,6 @@
 package com.example.marketplace.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -31,9 +32,10 @@ class ProductListAdapter(
             listener.onItemClick(currentPosition)
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
             val currentItem = list[position]
-            tvPrice.text = "${currentItem.price_per_unit} ${currentItem.price_type}/${currentItem.amount_type}"
+            tvPrice.text = "${currentItem.price_per_unit.toString()} ${currentItem.price_type}/${currentItem.amount_type}"
             tvSellerName.text = currentItem.username
             tvProductName.text = currentItem.title
             val images = currentItem.images

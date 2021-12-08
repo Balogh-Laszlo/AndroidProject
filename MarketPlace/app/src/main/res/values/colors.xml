@@ -13,4 +13,5 @@
     <color name="loginTextColor2">#EEEEEE</color>
     <color name="hintColor">#606060</color>
     <color name="spDropDown">#8AF5FF</color>
+    <color name="circleBg">#00D3C7</color>
 </resources>

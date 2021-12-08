@@ -3,7 +3,7 @@ package com.example.marketplace.model
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Image(val _id: String, val image_id: String, val image_name: String, val image_path: String)
+data class Image(val _id: String ="", val image_id: String ="", val image_name: String= "", val image_path: String="")
 
 @JsonClass(generateAdapter = true)
 data class Product(var rating: Double =0.0,

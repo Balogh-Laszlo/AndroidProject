@@ -25,4 +25,7 @@
     <string name="order_now">Order now</string>
     <string name="available_amount">Available amount: </string>
     <string name="rate_this_fare_click_on_the_stars_above">Rate this fare, click on the stars above</string>
+    <string name="upload_images">Upload images</string>
+    <string name="this_will_be_your_main_image">This will be your main image.</string>
+    <string name="drag_and_drop_the_image_in_the_desired_order">Drag and drop the image in the desired order.</string>
 </resources>

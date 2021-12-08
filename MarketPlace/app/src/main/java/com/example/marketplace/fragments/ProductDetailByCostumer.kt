@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.marketplace.adapters.ProductImageAdapter
 import com.example.marketplace.R
+import com.example.marketplace.model.Image
 import com.example.marketplace.model.SharedViewModel
 import java.sql.Date
 import java.sql.Timestamp
@@ -67,12 +68,12 @@ class ProductDetailByCostumer : Fragment() {
                     .load(R.drawable.inactive)
                     .into(ivIsActive)
             }
-            tvAmount.text = product.units
+            tvAmount.text = product.units.toString()
             tvProductDescription.text = product.description
             if(product.images.isNotEmpty()) {
                 vpImages.adapter = ProductImageAdapter(requireContext(), product.images)
             }else{
-                vpImages.adapter = ProductImageAdapter(requireContext(), listOf())
+                vpImages.adapter = ProductImageAdapter(requireContext(), listOf(Image()))
             }
         }
     }
