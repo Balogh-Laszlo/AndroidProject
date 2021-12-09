@@ -1,16 +1,14 @@
 package com.example.marketplace.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Switch
+import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +47,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         Log.d("xxx",MyApplication.username)
         val view = inflater.inflate(R.layout.fragment_timeline, container, false)
         initialize(view)
@@ -68,9 +67,47 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             rvAdapter.setData(listViewModel.products.value as ArrayList<Product>)
             rvAdapter.notifyDataSetChanged()
             sharedViewModel.productList = listViewModel.products.value
+            setupSearch()
         }
         spOrder.onItemSelectedListener = this
         return view
+    }
+
+    private fun setupSearch() {
+        if(MyApplication.searchView != null) {
+            val id = MyApplication.searchView!!.context.resources
+                .getIdentifier("android:id/search_src_text", null, null)
+
+            val textView = MyApplication.searchView!!.findViewById<View>(id) as TextView
+
+            textView.setTextColor(Color.WHITE)
+            Log.d("xxx","searchItem not null")
+            MyApplication.searchView!!.setOnQueryTextListener(object :
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if(MyApplication.searchMenuItem != null){
+                        MyApplication.searchMenuItem!!.collapseActionView()
+                    }
+                    return false
+                }
+
+                override fun onQueryTextChange(s: String): Boolean {
+                    Log.d("xxx",s)
+                    val list = mutableListOf<Product>()
+                    if (MyApplication.searchView != null) {
+                        sharedViewModel.productList!!.forEach {
+                            if (it.title.contains(s)) {
+                                list.add(it)
+                            }
+                        }
+                    }
+                    rvAdapter.setData(list)
+                    rvAdapter.notifyDataSetChanged()
+
+                    return false
+                }
+            })
+        }
     }
 
     private fun initialize(view: View?) {

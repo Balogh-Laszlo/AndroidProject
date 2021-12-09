@@ -1,5 +1,6 @@
 package com.example.marketplace.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +26,8 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
     private lateinit var btnAddProduct: ImageButton
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val list: MutableList<Product> = mutableListOf()
+    private lateinit var adapter: ProductListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -36,6 +41,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
         initializeView(view)
         setAdapters()
         registerListeners()
+        setupSearch()
         return view
     }
 
@@ -46,7 +52,6 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
     }
 
     private fun setAdapters() {
-        val list:MutableList<Product> = mutableListOf()
         if (sharedViewModel.productList != null){
             sharedViewModel.productList!!.forEach {
                 if(it.username.compareTo(MyApplication.username) == 0){
@@ -56,7 +61,9 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
                 }
             }
         }
-        rvItemList.adapter = ProductListAdapter(requireContext(),list,this)
+        sharedViewModel.productList = list
+        adapter = ProductListAdapter(requireContext(),list,this)
+        rvItemList.adapter = adapter
         rvItemList.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -69,5 +76,35 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         findNavController().navigate(R.id.productDetailsByOwnerFragment)
+    }
+    private fun setupSearch() {
+        if(MyApplication.searchView != null) {
+            Log.d("xxx","searchItem not null")
+            MyApplication.searchView!!.setOnQueryTextListener(object :
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if(MyApplication.searchMenuItem != null){
+                        MyApplication.searchMenuItem!!.collapseActionView()
+                    }
+                    return false
+                }
+
+                override fun onQueryTextChange(s: String): Boolean {
+                    Log.d("xxx",s)
+                    val list1 = mutableListOf<Product>()
+                    if (MyApplication.searchView != null) {
+                        list.forEach {
+                            if (it.title.contains(s)) {
+                                list1.add(it)
+                            }
+                        }
+                    }
+                    adapter.setData(list1)
+                    adapter.notifyDataSetChanged()
+
+                    return false
+                }
+            })
+        }
     }
 }

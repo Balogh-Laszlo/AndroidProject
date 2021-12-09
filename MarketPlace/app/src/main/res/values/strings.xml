@@ -28,4 +28,8 @@
     <string name="upload_images">Upload images</string>
     <string name="this_will_be_your_main_image">This will be your main image.</string>
     <string name="drag_and_drop_the_image_in_the_desired_order">Drag and drop the image in the desired order.</string>
+    <string name="today">Today</string>
+    <string name="give_us_details_about_your_fare">Give us details about your fare</string>
+    <string name="title">Title</string>
+    <string name="price_amount">Price/amount</string>
 </resources>

@@ -25,6 +25,7 @@
             app:menu="@menu/main_menu"
             app:navigationIcon="@drawable/bazaar_logo_coloured"
             app:titleTextColor="@color/loginTextColor1" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

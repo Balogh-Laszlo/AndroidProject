@@ -3,14 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/searchMenu"
         android:icon="@drawable/vector"
         android:title="Item"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
     <item
+        android:id="@+id/filterMenu"
         android:icon="@drawable/filter"
         android:title="Item"
         app:showAsAction="always" />
     <item
+        android:id="@+id/profileMenu"
         android:icon="@drawable/avdefault_avatar"
         android:title="Item"
         app:showAsAction="always" />
