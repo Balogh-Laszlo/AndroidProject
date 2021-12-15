@@ -21,7 +21,7 @@ class Repository {
         return RetrofitInstance.api.resetPassword(request)
     }
     suspend fun addProduct(request:AddProductRequest,token: String): Product{
-        return RetrofitInstance.api.addProduct(request,token)
+        return RetrofitInstance.api.addProduct(token,request.title,request.description,request.price_per_unit.toString(),request.units.toString(),true,request.rating,request.amount_type,request.price_type)
     }
 
 }

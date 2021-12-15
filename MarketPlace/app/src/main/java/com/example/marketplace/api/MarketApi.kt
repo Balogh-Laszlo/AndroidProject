@@ -3,10 +3,7 @@ package com.example.marketplace.api
 import android.provider.SyncStateContract
 import com.example.marketplace.model.*
 import com.example.marketplace.utils.Constants
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface MarketApi {
     @POST(Constants.LOGIN_URL)
@@ -24,7 +21,17 @@ interface MarketApi {
     @POST(Constants.RESET_PASSWORD)
     suspend fun resetPassword(@Body request:ResetPasswordRequest) :ResetPasswordResponse
 
+    //Part
     @POST(Constants.ADD_PRODUCT_URL)
-    suspend fun addProduct(@Body request: AddProductRequest,@Header("token") token:String):Product
+    suspend fun addProduct(@Header("token") token:String,
+                          @Part("title") title:String,
+                          @Part("description") description:String,
+                          @Part("price_per_unit") price_per_unit:String,
+                          @Part("units") units:String,
+                          @Part("is_active") is_active:Boolean,
+                          @Part("rating") rating:Double,
+                          @Part("amount_type") amount_type:String,
+                          @Part("price_type") price_type:String
+                    ):Product
 
 }
