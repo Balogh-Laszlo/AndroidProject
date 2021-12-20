@@ -21,7 +21,7 @@ class ListViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch {
             try {
                 val result =
-                    repository.getProducts(MyApplication.token,100)
+                    repository.getProducts(MyApplication.token,1000)
                 products.value = result.products as MutableList<Product>
                 Log.d("xxx", "ListViewModel - #products:  ${result.item_count}")
             }catch(e: Exception){

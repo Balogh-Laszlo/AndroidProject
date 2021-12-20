@@ -20,7 +20,7 @@ class AddProductViewModel(private val repository: Repository) : ViewModel() {
 
     }
 
-    private fun addProduct() {
+    suspend fun addProduct() {
         try {
             val request = AddProductRequest(uploadImages = product.value!!.images,
                                             title=product.value!!.title,
@@ -32,9 +32,7 @@ class AddProductViewModel(private val repository: Repository) : ViewModel() {
                                             rating= 5.0,
                                             units = product.value!!.units
                 )
-            viewModelScope.launch {
-                productResult.value = repository.addProduct(request,MyApplication.token)
-            }
+            productResult.value = repository.addProduct(request,MyApplication.token)
 
         }catch(e: Exception){
             Log.d("xxx", "AddProductViewModel exception: $e")

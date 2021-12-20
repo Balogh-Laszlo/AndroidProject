@@ -11,4 +11,10 @@
         <item>EUR</item>
         <item>HUF</item>
     </string-array>
+    <string-array name="AmountType">
+        <item>Kg</item>
+        <item>L</item>
+        <item>t</item>
+        <item>db</item>
+    </string-array>
 </resources>

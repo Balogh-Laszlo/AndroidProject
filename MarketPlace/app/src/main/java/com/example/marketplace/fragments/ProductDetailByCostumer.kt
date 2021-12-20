@@ -80,13 +80,13 @@ class ProductDetailByCostumer : Fragment() {
 
     private fun initializeView(view: View?) {
         if(view != null){
-            vpImages= view.findViewById(R.id.vpImagesCustomer)
+            vpImages= view.findViewById(R.id.vpImagesCostumer)
             ivProfile = view.findViewById(R.id.ivProfileDetailCostumer)
             tvSellerName = view.findViewById(R.id.tvSellerNameDeetailCostumer)
             tvDate = view.findViewById(R.id.tvDateDetailCostumer)
             tvProductTitle =view.findViewById(R.id.tvProductTitleDetailCostumer)
             tvPrice = view.findViewById(R.id.tvPriceDetailCostumer)
-            tvProductState = view.findViewById(R.id.tvProductStateDetailCostumer)
+            tvProductState = view.findViewById(R.id.tvProductStateDetailOwner)
             ivIsActive = view.findViewById(R.id.ivIsActive)
             tvAmount = view.findViewById(R.id.tvAmountDetailCostumer)
             tvProductDescription = view.findViewById(R.id.tvProductDescriptionDetailCostumer)

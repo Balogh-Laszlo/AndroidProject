@@ -2,6 +2,8 @@ package com.example.marketplace.model
 
 import com.squareup.moshi.JsonClass
 
+data class AddProductData(var title: String ="", var price: String ="", var price_type: String ="", var amount: String="", var amount_type: String="", var description: String="", var sellerName: String="", var sellerEmail: String="", var phoneNumber: String="")
+
 @JsonClass(generateAdapter = true)
 data class Image(val _id: String ="", val image_id: String ="", val image_name: String= "", val image_path: String="")
 
@@ -12,8 +14,8 @@ data class Product(var rating: Double =0.0,
                    var product_id: String = "",
                    var username: String = "",
                    var is_active: Boolean = true,
-                   var price_per_unit: Double = 0.0,
-                   var units: Int = 0,
+                   var price_per_unit: String = "0.0",
+                   var units: String = "0",
                    var description: String = "",
                    var title: String ="",
                    var images: List<Image> = listOf(),
@@ -30,8 +32,8 @@ data class AddProductRequest(
     val uploadImages: List<Image>,
     val title: String,
     val description:String,
-    val price_per_unit:Double,
-    val units: Int,
+    val price_per_unit:String,
+    val units: String,
     val is_active:Boolean,
     val rating:Double,
     val amount_type: String,

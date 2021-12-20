@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsByOwnerFragment">
+    tools:context=".fragments.ProductDetailByCostumer">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpImagesOwner"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivProfileDetailOwner"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/avdefault_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesOwner" />
+
+        <TextView
+            android:id="@+id/tvSellerNameDeetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            app:layout_constraintStart_toEndOf="@+id/ivProfileDetailOwner"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesOwner" />
+
+        <TextView
+            android:id="@+id/tvDateDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpImagesOwner" />
+
+        <TextView
+            android:id="@+id/tvProductTitleDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            android:textColor="@color/loginFragmentBackground"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProfileDetailOwner" />
+
+        <TextView
+            android:id="@+id/tvPriceDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductTitleDetailOwner" />
+
+        <TextView
+            android:id="@+id/tvProductStateDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textColor="@color/loginTextColor1"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateDetailOwner" />
+
+        <ImageView
+            android:id="@+id/ivIsActiveOwner"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/product"
+            app:layout_constraintEnd_toStartOf="@+id/tvProductStateDetailOwner"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateDetailOwner" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/available_amount"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetailOwner" />
+
+        <TextView
+            android:id="@+id/tvAmountDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text View"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriceDetailOwner" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/rate_this_fare_click_on_the_stars_above"
+            android:textColor="@color/hintColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/tvProductDescriptionDetailOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

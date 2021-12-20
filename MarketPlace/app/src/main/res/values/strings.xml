@@ -32,4 +32,9 @@
     <string name="give_us_details_about_your_fare">Give us details about your fare</string>
     <string name="title">Title</string>
     <string name="price_amount">Price/amount</string>
+    <string name="short_description">Short description</string>
+    <string name="contact_details">Contact details</string>
+    <string name="name">Name</string>
+    <string name="preview_my_fare">Preview my fare</string>
+    <string name="launch_my_fare">Launch my fare</string>
 </resources>

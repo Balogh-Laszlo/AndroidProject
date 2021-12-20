@@ -22,6 +22,7 @@ interface MarketApi {
     suspend fun resetPassword(@Body request:ResetPasswordRequest) :ResetPasswordResponse
 
     //Part
+    @Multipart
     @POST(Constants.ADD_PRODUCT_URL)
     suspend fun addProduct(@Header("token") token:String,
                           @Part("title") title:String,

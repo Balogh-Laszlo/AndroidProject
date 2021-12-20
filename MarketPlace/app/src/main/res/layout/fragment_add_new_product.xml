@@ -22,6 +22,19 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <TextView
+            android:id="@+id/tvContactDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/contact_details"
+            android:textColor="@color/loginBackground"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiDescription" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
@@ -138,7 +151,7 @@
             app:layout_constraintTop_toBottomOf="@+id/swIsActiveAddProduct" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout8"
+            android:id="@+id/tiTitle"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,13 +173,38 @@
                 android:hint="@string/title" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiDescription"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxStrokeColor="@color/hintColor"
+            app:boxStrokeWidth="1dp"
+            app:errorContentDescription="Describe your product, like its origin, made for..."
+            app:hintTextColor="@color/hintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescriptionAddProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/short_description"
+                android:textColorHint="@color/hintColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+            app:layout_constraintTop_toBottomOf="@+id/tiTitle">
 
             <Spinner
                 android:id="@+id/spPriceTypeAddProduct"
@@ -181,7 +219,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout9"
+                android:id="@+id/tiPrice"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -200,10 +238,161 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/price_amount"
+                    android:inputType="number"
                     android:textColorHint="@color/hintColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <Spinner
+                android:id="@+id/spAmountTypeAddProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:dropDownSelector="@color/loginBackground"
+                android:elevation="10dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiAmount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:boxStrokeColor="@color/hintColor"
+                app:errorContentDescription="Select an amount"
+                app:hintTextColor="@color/hintColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAmountAddProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/available_amount"
+                    android:inputType="number"
+                    android:textColorHint="@color/hintColor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxStrokeColor="@color/hintColor"
+            app:boxStrokeWidth="1dp"
+            app:errorContentDescription="Type in your name"
+            app:hintTextColor="@color/hintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContactDetails">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSellerNameAddProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxStrokeColor="@color/hintColor"
+            app:boxStrokeWidth="1dp"
+            app:errorContentDescription="Type in your email address"
+            app:hintTextColor="@color/hintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmailAddProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiPhoneNumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxStrokeColor="@color/hintColor"
+            app:boxStrokeWidth="1dp"
+            app:errorContentDescription="Type in your phone number"
+            app:hintTextColor="@color/hintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhoneNumberAddProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_number"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnPreviewMyFare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/loginBackground"
+            android:text="@string/preview_my_fare"
+            android:textAllCaps="false"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tiPhoneNumber" />
+
+        <Button
+            android:id="@+id/btnLaunchMyFare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/loginTextColor1"
+            android:text="@string/launch_my_fare"
+            android:textAllCaps="false"
+            android:textColor="@color/loginBackground"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPreviewMyFare" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
