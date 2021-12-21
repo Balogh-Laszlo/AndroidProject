@@ -41,4 +41,5 @@
     <string name="revenew">Revenew</string>
     <string name="price_item">Price/item</string>
     <string name="total_items">Total Items</string>
+    <string name="do_you_want_to_delete_this_item">Do you want to delete this item:</string>
 </resources>

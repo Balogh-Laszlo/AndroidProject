@@ -8,19 +8,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marketplace.MyApplication
 import com.example.marketplace.R
 import com.example.marketplace.adapters.ProductListAdapter
+import com.example.marketplace.model.DeleteRequest
 import com.example.marketplace.model.Product
 import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
+import com.example.marketplace.repository.Repository
+import com.example.marketplace.viewmodels.DeleteProductViewModel
+import com.example.marketplace.viewmodels.DeleteProductViewModelFactory
+import com.example.marketplace.viewmodels.RegisterViewModel
+import com.example.marketplace.viewmodels.RegisterViewModelFactory
+import kotlinx.coroutines.launch
 
 
 class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
@@ -30,9 +40,19 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val list: MutableList<Product> = mutableListOf()
+    private val list1:MutableList<Product> = mutableListOf()
     private lateinit var adapter: ProductListAdapter
+
+    private lateinit var deleteProductViewModel: DeleteProductViewModel
+    private var selectedPosition = -1
+
+    companion object{
+        const val TAG = "MYMARKET"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val factory = DeleteProductViewModelFactory (Repository())
+        deleteProductViewModel = ViewModelProvider(this, factory)[DeleteProductViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -45,7 +65,20 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         setAdapters()
         registerListeners()
         setupSearch()
+        deleteProductViewModel.deleteProductResponse.observe(viewLifecycleOwner){
+            showDeleteSuccessfulDialog()
+        }
         return view
+    }
+
+    private fun showDeleteSuccessfulDialog() {
+        Log.d(TAG,deleteProductViewModel.deleteProductResponse.value.toString())
+        if(selectedPosition != -1){
+            list.removeAt(selectedPosition)
+            adapter.setData(list)
+            adapter.notifyDataSetChanged()
+            selectedPosition = -1
+        }
     }
 
     private fun registerListeners() {
@@ -78,6 +111,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     }
 
     override fun onItemClick(position: Int) {
+
         sharedViewModel.currentProduct = sharedViewModel.productList!![position]
         findNavController().navigate(R.id.productDetailsByOwnerFragment)
     }
@@ -95,7 +129,6 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
 
                 override fun onQueryTextChange(s: String): Boolean {
                     Log.d("xxx",s)
-                    val list1 = mutableListOf<Product>()
                     if (MyApplication.searchView != null) {
                         list.forEach {
                             if (it.title.contains(s)) {
@@ -113,7 +146,28 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     }
 
     override fun onDeleteClick(position: Int) {
-        val dialog = Dialog(requireContext())
+        val dialog = Dialog(requireContext(),R.style.DialogStyle)
+        dialog.setContentView(R.layout.delete_dialog_layout)
+        dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_dialog)
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvProductTitleDeleteDialog)
+        tvTitle.text = sharedViewModel.productList!![position].title.replace("\"","",true)
+        val btnNo = dialog.findViewById<Button>(R.id.btnNoDeleteDialog)
+        val btnYes = dialog.findViewById<Button>(R.id.btnYesDeleteDialog)
+        dialog.show()
+        btnNo.setOnClickListener {
+            dialog.dismiss()
+        }
+        btnYes.setOnClickListener {
+            btnYes.isEnabled = false
+            deleteProductViewModel.deleteRequest.value = DeleteRequest(list[position].product_id,MyApplication.token)
+            Log.d("xxx",deleteProductViewModel.deleteRequest.value.toString())
+            lifecycleScope.launch {
+                deleteProductViewModel.deleteProduct()
+            }
+            dialog.dismiss()
+            selectedPosition = position
+        }
+
 
     }
 }

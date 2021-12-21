@@ -25,8 +25,8 @@ data class Product(var rating: Double =0.0,
 )
 
 data class DeleteRequest(
-    val product_id: String,
-    val token:String
+    var product_id: String,
+    var token:String
 )
 
 @JsonClass(generateAdapter = true)
