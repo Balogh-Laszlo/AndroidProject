@@ -28,6 +28,14 @@ class ProductDetailsByOwnerFragment : Fragment() {
     private lateinit var ivIsActive: ImageView
     private lateinit var tvAmount: TextView
     private lateinit var tvProductDescription: TextView
+    private lateinit var tvTotalAmount: TextView
+    private lateinit var tvTotalAmountType: TextView
+    private lateinit var tvPricePerItem: TextView
+    private lateinit var tvPriceType: TextView
+    private lateinit var tvSoldAmount: TextView
+    private lateinit var tvSoldAmountType: TextView
+    private lateinit var tvRevenue: TextView
+    private lateinit var tvRevenueType: TextView
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -80,6 +88,14 @@ class ProductDetailsByOwnerFragment : Fragment() {
             tvAmount.text =units
             val description = product.description.replace("\"","",true)
             tvProductDescription.text = description
+            tvTotalAmount.text = "${(units).toDouble()-sharedViewModel.soldItems}"
+            tvTotalAmountType.text = amountType
+            tvPricePerItem.text = price
+            tvPriceType.text = priceType
+            tvSoldAmount.text = "${sharedViewModel.soldItems}"
+            tvSoldAmountType.text = amountType
+            tvRevenue.text = "${sharedViewModel.soldItems*price.toDouble()}"
+            tvRevenueType.text = priceType
         }
     }
 
@@ -95,6 +111,14 @@ class ProductDetailsByOwnerFragment : Fragment() {
             ivIsActive = view.findViewById(R.id.ivIsActiveOwner)
             tvAmount = view.findViewById(R.id.tvAmountDetailOwner)
             tvProductDescription = view.findViewById(R.id.tvProductDescriptionDetailOwner)
+            tvTotalAmount = view.findViewById(R.id.tvAmountDetailsByOwner)
+            tvTotalAmountType = view.findViewById(R.id.tvAmountTypeDetailByOwner)
+            tvPricePerItem = view.findViewById(R.id.tvPriceDetailByOwner)
+            tvPriceType = view.findViewById(R.id.tvPriceTypeDetailByOwner)
+            tvSoldAmount = view.findViewById(R.id.tvSoldAmountDetailByOwner)
+            tvSoldAmountType = view.findViewById(R.id.tvSoldAmountTypeDetailByOwner)
+            tvRevenue = view.findViewById(R.id.tvRevenewDetailByOwner)
+            tvRevenueType = view.findViewById(R.id.tvRevenewTypeDetailByOwner)
         }
     }
 }

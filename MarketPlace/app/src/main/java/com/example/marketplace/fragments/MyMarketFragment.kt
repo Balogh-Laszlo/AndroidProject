@@ -79,6 +79,14 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             adapter.notifyDataSetChanged()
             selectedPosition = -1
         }
+        val dialog = Dialog(requireContext(),R.style.DialogStyle)
+        dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_dialog)
+        dialog.setContentView(R.layout.delete_successful_dialog_layout)
+        val btnClose = dialog.findViewById<ImageButton>(R.id.btnCloseDialog)
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     private fun registerListeners() {
