@@ -20,6 +20,7 @@ import com.example.marketplace.MyApplication
 import com.example.marketplace.adapters.ProductListAdapter
 import com.example.marketplace.R
 import com.example.marketplace.model.Product
+import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
 import com.example.marketplace.viewmodels.ListViewModel
@@ -54,7 +55,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         lifecycleScope.launch {
             listViewModel.getProducts()
         }
-        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this)
+        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this,Screen.TimeLine,null)
         rvList.adapter = rvAdapter
         rvList.layoutManager = LinearLayoutManager(context)
         rvList.addItemDecoration(

@@ -37,4 +37,8 @@
     <string name="name">Name</string>
     <string name="preview_my_fare">Preview my fare</string>
     <string name="launch_my_fare">Launch my fare</string>
+    <string name="sold_items">Sold items</string>
+    <string name="revenew">Revenew</string>
+    <string name="price_item">Price/item</string>
+    <string name="total_items">Total Items</string>
 </resources>

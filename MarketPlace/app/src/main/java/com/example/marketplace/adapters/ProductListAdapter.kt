@@ -2,42 +2,65 @@ package com.example.marketplace.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.marketplace.R
 import com.example.marketplace.model.Product
+import com.example.marketplace.model.Screen
 
 class ProductListAdapter(
     private val context:Context,
     private var list:List<Product>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val screen: Screen,
+    private val deleteClickListener: OnDeleteClickListener?
 )
     :RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
 {
     interface OnItemClickListener{
         fun onItemClick(position:Int)
     }
+    interface OnDeleteClickListener{
+        fun onDeleteClick(position: Int)
+    }
     inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private val tvPrice = itemView.findViewById<TextView>(R.id.tvPriceTimeline)
         private val tvSellerName = itemView.findViewById<TextView>(R.id.tvSellerNameTimeline)
         private val tvProductName = itemView.findViewById<TextView>(R.id.tvProductNameTimeline)
         private val ivProductImage = itemView.findViewById<ImageView>(R.id.ivProductImage)
+        private val btnDelete = itemView.findViewById<ImageButton>(R.id.btnDeleteProduct)
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
             listener.onItemClick(currentPosition)
         }
-
         @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
+            if (screen == Screen.MyMarket){
+                btnDelete.visibility = View.VISIBLE
+                Glide.with(context)
+                    .load(R.drawable.ic_delete)
+                    .into(btnDelete)
+            }
+            btnDelete.setOnClickListener {
+                if(deleteClickListener!= null) {
+                    deleteClickListener.onDeleteClick(position)
+                }
+            }
             val currentItem = list[position]
-            tvPrice.text = "${currentItem.price_per_unit.toString()} ${currentItem.price_type}/${currentItem.amount_type}"
+            val price = currentItem.price_per_unit.replace("\"","",true)
+            val amountType = currentItem.amount_type.replace("\"","",true)
+            val priceType = currentItem.price_type.replace("\"","",true)
+            tvPrice.text = "${price} ${priceType}/${amountType}"
             tvSellerName.text = currentItem.username
-            tvProductName.text = currentItem.title
+            val title = currentItem.title.replace("\"","",true)
+            tvProductName.text = title
             val images = currentItem.images
             if(images.isNotEmpty()){
                 Glide.with(context)

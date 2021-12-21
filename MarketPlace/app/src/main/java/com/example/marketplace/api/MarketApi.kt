@@ -34,5 +34,9 @@ interface MarketApi {
                           @Part("amount_type") amount_type:String,
                           @Part("price_type") price_type:String
                     ):Product
+    @POST(Constants.DELETE_PRODUCT_URL)
+    suspend fun deleteProduct(@Header("token") token:String,
+                              @Query("product_id") product_id:String
+                              ): DeleteResponse
 
 }

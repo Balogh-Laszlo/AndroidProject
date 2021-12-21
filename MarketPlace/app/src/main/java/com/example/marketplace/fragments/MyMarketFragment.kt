@@ -1,5 +1,6 @@
 package com.example.marketplace.fragments
 
+import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -18,10 +19,12 @@ import com.example.marketplace.MyApplication
 import com.example.marketplace.R
 import com.example.marketplace.adapters.ProductListAdapter
 import com.example.marketplace.model.Product
+import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
 
 
-class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
+class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
+    ProductListAdapter.OnDeleteClickListener {
     private lateinit var rvItemList: RecyclerView
     private lateinit var btnAddProduct: ImageButton
 
@@ -62,7 +65,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
             }
         }
         sharedViewModel.productList = list
-        adapter = ProductListAdapter(requireContext(),list,this)
+        adapter = ProductListAdapter(requireContext(),list,this,Screen.MyMarket,this)
         rvItemList.adapter = adapter
         rvItemList.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -75,6 +78,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
+        sharedViewModel.currentProduct = sharedViewModel.productList!![position]
         findNavController().navigate(R.id.productDetailsByOwnerFragment)
     }
     private fun setupSearch() {
@@ -106,5 +110,10 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener {
                 }
             })
         }
+    }
+
+    override fun onDeleteClick(position: Int) {
+        val dialog = Dialog(requireContext())
+
     }
 }

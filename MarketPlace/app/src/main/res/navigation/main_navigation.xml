@@ -65,7 +65,7 @@
         tools:layout="@layout/fragment_add_new_product" />
     <fragment
         android:id="@+id/productDetailsByOwnerFragment"
-        android:name="com.example.marketplace.ProductDetailsByOwnerFragment"
+        android:name="com.example.marketplace.fragments.ProductDetailsByOwnerFragment"
         android:label="fragment_product_details_by_owner"
         tools:layout="@layout/fragment_product_details_by_owner" />
 </navigation>

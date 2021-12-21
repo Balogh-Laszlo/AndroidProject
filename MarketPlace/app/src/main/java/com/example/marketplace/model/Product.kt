@@ -4,6 +4,8 @@ import com.squareup.moshi.JsonClass
 
 data class AddProductData(var title: String ="", var price: String ="", var price_type: String ="", var amount: String="", var amount_type: String="", var description: String="", var sellerName: String="", var sellerEmail: String="", var phoneNumber: String="")
 
+enum class Screen{TimeLine, MyMarket}
+
 @JsonClass(generateAdapter = true)
 data class Image(val _id: String ="", val image_id: String ="", val image_name: String= "", val image_path: String="")
 
@@ -22,7 +24,17 @@ data class Product(var rating: Double =0.0,
                    var creation_time: Long = 0
 )
 
+data class DeleteRequest(
+    val product_id: String,
+    val token:String
+)
 
+@JsonClass(generateAdapter = true)
+data class DeleteResponse(
+    val message:String,
+    val product_id: String,
+    val deletion_time:String
+)
 
 @JsonClass(generateAdapter = true)
 data class ProductResponse(val item_count: Int, val products: List<Product>, val timestamp: Long)
