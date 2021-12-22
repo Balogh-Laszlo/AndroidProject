@@ -6,9 +6,11 @@ import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.marketplace.R
@@ -20,7 +22,8 @@ class ProductListAdapter(
     private var list:List<Product>,
     private val listener: OnItemClickListener,
     private val screen: Screen,
-    private val deleteClickListener: OnDeleteClickListener?
+    private val deleteClickListener: OnDeleteClickListener?,
+    private val orderClickListener: OnOrderClickListener?
 )
     :RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
 {
@@ -30,12 +33,16 @@ class ProductListAdapter(
     interface OnDeleteClickListener{
         fun onDeleteClick(position: Int)
     }
+    interface OnOrderClickListener{
+        fun onOrderClick(position: Int)
+    }
     inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         private val tvPrice = itemView.findViewById<TextView>(R.id.tvPriceTimeline)
         private val tvSellerName = itemView.findViewById<TextView>(R.id.tvSellerNameTimeline)
         private val tvProductName = itemView.findViewById<TextView>(R.id.tvProductNameTimeline)
         private val ivProductImage = itemView.findViewById<ImageView>(R.id.ivProductImage)
         private val btnDelete = itemView.findViewById<ImageButton>(R.id.btnDeleteProduct)
+        private val btnOrder = itemView.findViewById<Button>(R.id.btnOrderNow)
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
             listener.onItemClick(currentPosition)
@@ -47,11 +54,13 @@ class ProductListAdapter(
                 Glide.with(context)
                     .load(R.drawable.ic_delete)
                     .into(btnDelete)
+                btnOrder.visibility = View.INVISIBLE
+            }
+            btnOrder.setOnClickListener {
+                orderClickListener?.onOrderClick(position)
             }
             btnDelete.setOnClickListener {
-                if(deleteClickListener!= null) {
-                    deleteClickListener.onDeleteClick(position)
-                }
+                deleteClickListener?.onDeleteClick(position)
             }
             val currentItem = list[position]
             val price = currentItem.price_per_unit.replace("\"","",true)

@@ -1,6 +1,7 @@
 package com.example.marketplace.fragments
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.marketplace.MyApplication
 import com.example.marketplace.adapters.ProductListAdapter
 import com.example.marketplace.R
@@ -25,11 +27,16 @@ import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
 import com.example.marketplace.viewmodels.ListViewModel
 import com.example.marketplace.viewmodels.ListViewModelFactory
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
-    AdapterView.OnItemSelectedListener {
+    AdapterView.OnItemSelectedListener, ProductListAdapter.OnOrderClickListener {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var swLatest:Switch
     private lateinit var spOrder:Spinner
@@ -55,7 +62,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         lifecycleScope.launch {
             listViewModel.getProducts()
         }
-        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this,Screen.TimeLine,null)
+        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this,Screen.TimeLine,null,this)
         rvList.adapter = rvAdapter
         rvList.layoutManager = LinearLayoutManager(context)
         rvList.addItemDecoration(
@@ -125,7 +132,12 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     }
     override fun onItemClick(position:Int){
         sharedViewModel.currentProduct = listViewModel.products.value!![position]
-        findNavController().navigate(R.id.action_timelineFragment_to_productDetailByCostumer)
+        if(sharedViewModel.currentProduct!!.username != MyApplication.username) {
+            findNavController().navigate(R.id.action_timelineFragment_to_productDetailByCostumer)
+        }
+        else{
+            findNavController().navigate(R.id.productDetailsByOwnerFragment)
+        }
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -164,5 +176,64 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         }
         rvAdapter.setData(listViewModel.products.value!!)
         rvAdapter.notifyDataSetChanged()
+    }
+
+    override fun onOrderClick(position: Int) {
+        val currentProduct = sharedViewModel.productList!![position]
+        val dialog = Dialog(requireContext(),R.style.DialogStyle)
+        dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_dialog_white)
+        dialog.setContentView(R.layout.order_now_dialog_layout)
+        dialog.show()
+        initializeDialog(dialog,currentProduct)
+    }
+
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
+    private fun initializeDialog(dialog: Dialog, currentProduct: Product) {
+        val btnClose = dialog.findViewById<ImageButton>(R.id.btnCloseOrderDialog)
+        val tvUserName = dialog.findViewById<TextView>(R.id.tvUserNameOrder)
+        val tvPrice = dialog.findViewById<TextView>(R.id.tvPriceOrderDialog)
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvTitleOrderDialog)
+        val tvIsActive = dialog.findViewById<TextView>(R.id.tvIsActiveOrderDialog)
+        val ivIsActive = dialog.findViewById<ImageView>(R.id.ivIsActiveOrderDialog)
+        val tvCreation = dialog.findViewById<TextView>(R.id.tvCreationTimeOrderDialog)
+        val tvAmountType = dialog.findViewById<TextView>(R.id.tvAmountTypeOrderDialog)
+        val etAmount = dialog.findViewById<TextInputEditText>(R.id.etAmountOrderDialog)
+        val etComments = dialog.findViewById<TextInputEditText>(R.id.etCommentsOrderDialog)
+        val btnCancel = dialog.findViewById<Button>(R.id.btnCancelOrderDialog)
+        val btnSend = dialog.findViewById<Button>(R.id.btnSendMyOrderOrderDialog)
+        val tiAmount = dialog.findViewById<TextInputLayout>(R.id.tiAmountOrderDialog)
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        tvUserName.text = currentProduct.username.replace("\"","")
+        tvPrice.text = currentProduct.price_per_unit.replace("\"","") +
+                " " +
+                currentProduct.price_type.replace("\"","") +
+                "/"+
+                currentProduct.amount_type.replace("\"","")
+        tvTitle.text = currentProduct.title.replace("\"","")
+        val date = Date(Timestamp(currentProduct.creation_time).time)
+        tvCreation.text = date.toLocaleString()
+        tvAmountType.text = currentProduct.amount_type.replace("\"","")
+        if (currentProduct.is_active){
+            tvIsActive.text = "Active"
+            tvIsActive.setTextColor(R.color.loginTextColor1)
+            Glide.with(requireContext())
+                .load(R.drawable.active)
+                .into(ivIsActive)
+        }else{
+            tvIsActive.text = "Inactive"
+            tvIsActive.setTextColor(R.color.hintColor)
+            Glide.with(requireContext())
+                .load(R.drawable.inactive)
+                .into(ivIsActive)
+        }
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        btnSend.setOnClickListener {
+
+        }
+
     }
 }

@@ -43,4 +43,6 @@
     <string name="total_items">Total Items</string>
     <string name="do_you_want_to_delete_this_item">Do you want to delete this item:</string>
     <string name="you_successfully_deleted_the_product">You successfully deleted the product!</string>
+    <string name="my_order">My order</string>
+    <string name="comments">Comments</string>
 </resources>

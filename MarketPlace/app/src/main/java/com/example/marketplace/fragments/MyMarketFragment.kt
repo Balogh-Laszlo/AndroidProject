@@ -106,7 +106,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             }
         }
         sharedViewModel.productList = list
-        adapter = ProductListAdapter(requireContext(),list,this,Screen.MyMarket,this)
+        adapter = ProductListAdapter(requireContext(),list,this,Screen.MyMarket,this,null)
         rvItemList.adapter = adapter
         rvItemList.layoutManager = LinearLayoutManager(requireContext())
     }
