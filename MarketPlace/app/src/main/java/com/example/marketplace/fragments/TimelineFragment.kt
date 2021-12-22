@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,10 +22,13 @@ import com.bumptech.glide.Glide
 import com.example.marketplace.MyApplication
 import com.example.marketplace.adapters.ProductListAdapter
 import com.example.marketplace.R
+import com.example.marketplace.model.OrderRequest
 import com.example.marketplace.model.Product
 import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
+import com.example.marketplace.viewmodels.AddOrderViewModel
+import com.example.marketplace.viewmodels.AddOrderViewModelFactory
 import com.example.marketplace.viewmodels.ListViewModel
 import com.example.marketplace.viewmodels.ListViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -44,10 +48,15 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     private lateinit var rvAdapter: ProductListAdapter
     private lateinit var rvList: RecyclerView
     private val sharedViewModel: SharedViewModel by activityViewModels()
+
+    private lateinit var addOrderViewModel: AddOrderViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val factory = ListViewModelFactory(Repository())
-        listViewModel = ViewModelProvider(requireActivity(),factory).get(ListViewModel::class.java)
+        listViewModel = ViewModelProvider(requireActivity(),factory)[ListViewModel::class.java]
+
+        val factory2 = AddOrderViewModelFactory(Repository())
+        addOrderViewModel = ViewModelProvider(requireActivity(),factory2)[AddOrderViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -78,7 +87,19 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             setupSearch()
         }
         spOrder.onItemSelectedListener = this
+
+        addOrderViewModel.response.observe(viewLifecycleOwner){
+            Log.d("xxx",it.toString())
+            showOrderSuccessDialog()
+        }
         return view
+    }
+
+    private fun showOrderSuccessDialog() {
+        val dialog = Dialog(requireContext(),R.style.DialogStyle)
+        dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_dialog_white)
+        dialog.setContentView(R.layout.order_complet_dialog_layout)
+        dialog.show()
     }
 
     private fun setupSearch() {
@@ -232,8 +253,37 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             dialog.dismiss()
         }
         btnSend.setOnClickListener {
-
+            if(validateData(etAmount)){
+                val request = OrderRequest(currentProduct.title.replace("\"",""),
+                    etComments.text.toString(),
+                    currentProduct.price_per_unit.replace("\"",""),
+                    etAmount.text.toString(),
+                    currentProduct.username.replace("\"","")
+                    )
+                dialog.dismiss()
+                order(request)
+            }
+            else{
+                tiAmount.error = tiAmount.errorContentDescription
+            }
         }
 
+    }
+
+    private fun order(request: OrderRequest) {
+        addOrderViewModel.request = request
+        lifecycleScope.launch {
+            addOrderViewModel.order()
+        }
+    }
+
+    private fun validateData(etAmount: TextInputEditText?): Boolean {
+        if(etAmount!=null){
+            if(etAmount.text!!.isEmpty()){
+                return false
+            }
+            return true
+        }
+        return false
     }
 }

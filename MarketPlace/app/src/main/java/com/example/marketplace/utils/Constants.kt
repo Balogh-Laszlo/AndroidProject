@@ -9,4 +9,5 @@ object Constants {
     const val RESET_PASSWORD ="user/reset"
     const val ADD_PRODUCT_URL= "products/add"
     const val DELETE_PRODUCT_URL= "products/remove"
+    const val ORDER_PRODUCT_URL= "orders/add"
 }

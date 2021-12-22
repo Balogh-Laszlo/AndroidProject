@@ -21,10 +21,13 @@ class Repository {
         return RetrofitInstance.api.resetPassword(request)
     }
     suspend fun addProduct(request:AddProductRequest,token: String): Product{
-        return RetrofitInstance.api.addProduct(token,request.title,request.description,request.price_per_unit.toString(),request.units.toString(),true,request.rating,request.amount_type,request.price_type)
+        return RetrofitInstance.api.addProduct(token,request.title,request.description,request.price_per_unit,request.units,true,request.rating,request.amount_type,request.price_type)
     }
     suspend fun deleteProduct(product_id:String, token:String):DeleteResponse{
         return RetrofitInstance.api.deleteProduct(token,product_id)
+    }
+    suspend fun addOrder(orderRequest: OrderRequest, token: String): OrderResponse{
+        return RetrofitInstance.api.addOrder(token,orderRequest.title,orderRequest.description,orderRequest.perice_per_unit,orderRequest.units,orderRequest.owner_username)
     }
 
 }
