@@ -197,7 +197,7 @@
         android:backgroundTint="@color/loginFragmentBackground"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="Send my order"
+        android:text="@string/send_my_order"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"

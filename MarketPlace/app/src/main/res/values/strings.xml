@@ -45,4 +45,9 @@
     <string name="you_successfully_deleted_the_product">You successfully deleted the product!</string>
     <string name="my_order">My order</string>
     <string name="comments">Comments</string>
+    <string name="order_complete">Order completed</string>
+    <string name="please_track_your_order_under">Please track your order under </string>
+    <string name="ongoing_orders">Ongoing Orders</string>
+    <string name="thank_you">Thank you!</string>
+    <string name="send_my_order">Send my order</string>
 </resources>

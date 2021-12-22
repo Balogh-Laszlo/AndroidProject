@@ -100,6 +100,18 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_dialog_white)
         dialog.setContentView(R.layout.order_complet_dialog_layout)
         dialog.show()
+        val btnClose = dialog.findViewById<ImageButton>(R.id.btnCloseOrderCompleteDialog)
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        val btnCancel = dialog.findViewById<Button>(R.id.btnCancelOrderCompleteDialog)
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        val tvOngoingOrders = dialog.findViewById<TextView>(R.id.tvOngoingOrdersOrderCompleteDialog)
+        tvOngoingOrders.setOnClickListener {
+            findNavController().navigate(R.id.action_timelineFragment_to_myFaresFragment)
+        }
     }
 
     private fun setupSearch() {

@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/myFaresFragment"
-        android:name="com.example.marketplace.MyFaresFragment"
+        android:name="com.example.marketplace.fragments.MyFaresFragment"
         android:label="fragment_my_fares"
         tools:layout="@layout/fragment_my_fares" >
         <action
