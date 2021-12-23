@@ -1,4 +1,4 @@
-package com.example.marketplace
+package com.example.marketplace.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marketplace.R
 import com.example.marketplace.adapters.OrderAdapter
 import com.example.marketplace.model.OrderScreen
 import com.example.marketplace.model.SharedViewModel

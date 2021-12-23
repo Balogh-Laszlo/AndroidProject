@@ -34,6 +34,23 @@ class OrderAdapter(val context: Context, var orders:List<Order>,val  screen: Ord
         @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
             var id =0
+            if(orders[position].status == "DECLINED"){
+                btnDecline.visibility = View.INVISIBLE
+                Glide.with(context)
+                    .load(R.drawable.ic_close_white)
+                    .into(btnAccept)
+            }else if(orders[position].status == "OPEN" && screen == OrderScreen.OngoingOrders){
+                btnDecline.visibility = View.INVISIBLE
+                Glide.with(context)
+                    .load(R.drawable.ic_question)
+                    .into(btnAccept)
+            }else if(orders[position].status == "OPEN"){
+
+            }
+            else{
+                btnDecline.visibility = View.INVISIBLE
+            }
+
             btnShowMore.setOnClickListener {
                 if(tvDescription.isVisible){
                     Glide.with(context)
@@ -47,8 +64,11 @@ class OrderAdapter(val context: Context, var orders:List<Order>,val  screen: Ord
                         .load(R.drawable.ic_up)
                         .into(btnShowMore)
                     tvDescription.visibility = View.VISIBLE
-                    spStatus.visibility = View.VISIBLE
-                    tvStatus.visibility = View.INVISIBLE
+                    if(screen == OrderScreen.OngoingSales) {
+                        spStatus.visibility = View.VISIBLE
+                        tvStatus.visibility = View.INVISIBLE
+                    }
+
                     id =0
                     id = when(orders[position].status){
                         "OPEN" -> 0
