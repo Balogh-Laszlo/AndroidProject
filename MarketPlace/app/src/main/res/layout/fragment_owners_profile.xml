@@ -52,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:textColor="@color/loginTextColor2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
-            android:hint="@string/user_name" />
+            android:hint="@string/user_name"
+            android:textColor="@color/loginTextColor2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -90,10 +92,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout10">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneNumberOwnerProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
-            android:hint="@string/phone_number" />
+            android:hint="@string/phone_number"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -59,4 +59,10 @@ interface MarketApi {
                            @Body status:String
                            ): UpdateSaleResponse
 
+    @GET(Constants.GET_USER_INFO_URL)
+    suspend fun getUserInfo(@Header("username") username:String): GetUserInfoResponse
+
+    @POST(Constants.UPDATE_USER_DATA_URL)
+    suspend fun updateUserData(@Header("token") token:String, @Body request: UpdateUserDataRequest): UpdateUserDataResponse
+
 }

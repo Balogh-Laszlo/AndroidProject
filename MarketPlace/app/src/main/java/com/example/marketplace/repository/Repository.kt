@@ -1,5 +1,6 @@
 package com.example.marketplace.repository
 
+import com.example.marketplace.MyApplication
 import com.example.marketplace.api.RetrofitInstance
 import com.example.marketplace.model.*
 import org.json.JSONArray
@@ -36,6 +37,12 @@ class Repository {
     }
     suspend fun updateSale(token:String, order_id:String, status:String): UpdateSaleResponse{
         return RetrofitInstance.api.updateSale(token, order_id, status)
+    }
+    suspend fun getUserInfo(username:String): GetUserInfoResponse{
+        return RetrofitInstance.api.getUserInfo(username)
+    }
+    suspend fun updateUserData(request:UpdateUserDataRequest) : UpdateUserDataResponse{
+        return RetrofitInstance.api.updateUserData(MyApplication.token,request)
     }
 
 }

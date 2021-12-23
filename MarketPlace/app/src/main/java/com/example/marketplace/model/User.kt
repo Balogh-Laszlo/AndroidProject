@@ -52,3 +52,47 @@ data class ResetPasswordResponse(
     val message: String,
     val timestamp:Long
 )
+
+data class UserData(
+    val username: String,
+    val phone_number: String,
+    val email: String,
+    val is_activated:Boolean,
+    val creation_time: String
+)
+
+@JsonClass(generateAdapter = true)
+data class GetUserInfoResponse(
+    val code: Int,
+    val data: List<UserData>,
+    val timestamp: Long
+)
+
+@JsonClass(generateAdapter = true)
+data class UpdateUserDataRequest(
+    val phone_number: String,
+    val email:String,
+    val username: String,
+    val userImage: List<Image> = listOf()
+)
+
+@JsonClass(generateAdapter = true)
+data class UpdatedData(
+//    val _id:String,
+    val username: String,
+//    val password: String,
+    val phone_number: String,
+    val email:String,
+    val is_activated: Boolean,
+    val image_url:String,
+    val image_id:String,
+    val creation_time: String,
+    val __v:Int
+)
+
+@JsonClass(generateAdapter = true)
+data class UpdateUserDataResponse(
+    val code: Int,
+    val updatedData: UpdatedData,
+    val timestamp: Long
+)
