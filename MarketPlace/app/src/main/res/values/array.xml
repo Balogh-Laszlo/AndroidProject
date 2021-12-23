@@ -17,4 +17,11 @@
         <item>t</item>
         <item>db</item>
     </string-array>
+    <string-array name="StatusType">
+        <item>Incoming order</item>
+        <item>Accepted order</item>
+        <item>Declined order</item>
+        <item>Delivering order</item>
+        <item>Delivered order</item>
+    </string-array>
 </resources>

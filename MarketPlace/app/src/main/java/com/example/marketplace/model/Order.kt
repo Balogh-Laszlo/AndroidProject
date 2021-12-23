@@ -39,6 +39,10 @@ data class GetOrderResponse(val item_count: Int,
                             val timestamp: Long
                             )
 
+enum class OrderScreen{
+    OngoingOrders, OngoingSales
+}
+
 
 
 

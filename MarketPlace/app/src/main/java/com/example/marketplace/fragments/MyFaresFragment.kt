@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.marketplace.MyApplication
+import com.example.marketplace.Orders
 import com.example.marketplace.R
 import com.example.marketplace.adapters.OrderPagerAdapter
 import com.example.marketplace.model.SharedViewModel
@@ -57,7 +58,7 @@ class MyFaresFragment : Fragment() {
                 it.orders.forEach { if(it.username != MyApplication.username){ isBuyer = false } }
                 if (isBuyer) {
                     Log.d("xxx", "My orders" +it.toString())
-                    sharedViewModel.myOrders = it.orders
+                    sharedViewModel.myOrders.value = it.orders
                 }
             }
             if (it.orders.isNotEmpty()){
@@ -65,7 +66,7 @@ class MyFaresFragment : Fragment() {
                 it.orders.forEach { if(it.owner_username != MyApplication.username){ isOwner = false } }
                 if(isOwner){
                     Log.d("xxx", "My sales"+ it.toString())
-                    sharedViewModel.mySales = it.orders
+                    sharedViewModel.mySales.value = it.orders
                 }
             }
         }
