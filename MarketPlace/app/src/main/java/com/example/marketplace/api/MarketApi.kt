@@ -48,5 +48,7 @@ interface MarketApi {
                          @Part("units") units:String,
                          @Part("owner_username") owner_username:String
                          ) : OrderResponse
+    @GET(Constants.GET_ORDERS_URL)
+    suspend fun getOrders(@Header("token") token:String, @Header("limit") limit: Int, @Header("filter") filter: String) : GetOrderResponse
 
 }

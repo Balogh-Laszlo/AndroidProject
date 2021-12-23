@@ -29,5 +29,8 @@ class Repository {
     suspend fun addOrder(orderRequest: OrderRequest, token: String): OrderResponse{
         return RetrofitInstance.api.addOrder(token,orderRequest.title,orderRequest.description,orderRequest.perice_per_unit,orderRequest.units,orderRequest.owner_username)
     }
+    suspend fun getOrders(filter: String,token: String): GetOrderResponse{
+        return RetrofitInstance.api.getOrders(token,1000,filter)
+    }
 
 }
