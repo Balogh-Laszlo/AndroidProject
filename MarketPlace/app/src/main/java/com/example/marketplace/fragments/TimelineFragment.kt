@@ -27,10 +27,7 @@ import com.example.marketplace.model.Product
 import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
-import com.example.marketplace.viewmodels.AddOrderViewModel
-import com.example.marketplace.viewmodels.AddOrderViewModelFactory
-import com.example.marketplace.viewmodels.ListViewModel
-import com.example.marketplace.viewmodels.ListViewModelFactory
+import com.example.marketplace.viewmodels.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
@@ -40,7 +37,8 @@ import kotlin.collections.ArrayList
 
 
 class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
-    AdapterView.OnItemSelectedListener, ProductListAdapter.OnOrderClickListener {
+    AdapterView.OnItemSelectedListener, ProductListAdapter.OnOrderClickListener,
+    ProductListAdapter.OnProfileClickListener {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var swLatest:Switch
     private lateinit var spOrder:Spinner
@@ -50,6 +48,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var addOrderViewModel: AddOrderViewModel
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val factory = ListViewModelFactory(Repository())
@@ -57,6 +56,8 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
 
         val factory2 = AddOrderViewModelFactory(Repository())
         addOrderViewModel = ViewModelProvider(requireActivity(),factory2)[AddOrderViewModel::class.java]
+        val factory3 = GetUserInfoViewModelFactory(Repository())
+        getUserInfoViewModel = ViewModelProvider(this,factory3)[GetUserInfoViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -71,7 +72,7 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         lifecycleScope.launch {
             listViewModel.getProducts()
         }
-        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this,Screen.TimeLine,null,this)
+        rvAdapter = ProductListAdapter(requireContext(),ArrayList<Product>(),this,Screen.TimeLine,null,this,this)
         rvList.adapter = rvAdapter
         rvList.layoutManager = LinearLayoutManager(context)
         rvList.addItemDecoration(
@@ -297,5 +298,10 @@ class TimelineFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             return true
         }
         return false
+    }
+
+    override fun onProfileClick(username:String) {
+        findNavController().navigate(R.id.profileFragment)
+        sharedViewModel.selectedUsername = username
     }
 }

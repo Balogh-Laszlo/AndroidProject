@@ -26,15 +26,12 @@ import com.example.marketplace.model.Product
 import com.example.marketplace.model.Screen
 import com.example.marketplace.model.SharedViewModel
 import com.example.marketplace.repository.Repository
-import com.example.marketplace.viewmodels.DeleteProductViewModel
-import com.example.marketplace.viewmodels.DeleteProductViewModelFactory
-import com.example.marketplace.viewmodels.RegisterViewModel
-import com.example.marketplace.viewmodels.RegisterViewModelFactory
+import com.example.marketplace.viewmodels.*
 import kotlinx.coroutines.launch
 
 
 class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
-    ProductListAdapter.OnDeleteClickListener {
+    ProductListAdapter.OnDeleteClickListener, ProductListAdapter.OnProfileClickListener {
     private lateinit var rvItemList: RecyclerView
     private lateinit var btnAddProduct: ImageButton
 
@@ -46,6 +43,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
     private lateinit var deleteProductViewModel: DeleteProductViewModel
     private var selectedPosition = -1
 
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
     companion object{
         const val TAG = "MYMARKET"
     }
@@ -53,6 +51,8 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
         super.onCreate(savedInstanceState)
         val factory = DeleteProductViewModelFactory (Repository())
         deleteProductViewModel = ViewModelProvider(this, factory)[DeleteProductViewModel::class.java]
+        val factory2 = GetUserInfoViewModelFactory(Repository())
+        getUserInfoViewModel = ViewModelProvider(this,factory2)[GetUserInfoViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -106,7 +106,7 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             }
         }
         sharedViewModel.productList = list
-        adapter = ProductListAdapter(requireContext(),list,this,Screen.MyMarket,this,null)
+        adapter = ProductListAdapter(requireContext(),list,this,Screen.MyMarket,this,null,this)
         rvItemList.adapter = adapter
         rvItemList.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -175,7 +175,9 @@ class MyMarketFragment : Fragment(), ProductListAdapter.OnItemClickListener,
             dialog.dismiss()
             selectedPosition = position
         }
+    }
 
-
+    override fun onProfileClick(username:String) {
+        findNavController().navigate(R.id.ownersProfileFragment)
     }
 }

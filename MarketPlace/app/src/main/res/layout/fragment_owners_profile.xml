@@ -97,7 +97,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
             android:hint="@string/phone_number"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/loginTextColor2" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

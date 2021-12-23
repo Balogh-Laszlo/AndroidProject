@@ -23,10 +23,14 @@ class ProductListAdapter(
     private val listener: OnItemClickListener,
     private val screen: Screen,
     private val deleteClickListener: OnDeleteClickListener?,
-    private val orderClickListener: OnOrderClickListener?
+    private val orderClickListener: OnOrderClickListener?,
+    private val profileClickListener: OnProfileClickListener
 )
     :RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
 {
+    interface OnProfileClickListener{
+        fun onProfileClick(username:String)
+    }
     interface OnItemClickListener{
         fun onItemClick(position:Int)
     }
@@ -84,6 +88,9 @@ class ProductListAdapter(
                     .override(200)
                     .circleCrop()
                     .into(ivProductImage)
+            }
+            tvSellerName.setOnClickListener {
+                profileClickListener.onProfileClick(list[position].username)
             }
         }
 

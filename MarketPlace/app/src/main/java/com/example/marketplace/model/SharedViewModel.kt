@@ -9,4 +9,5 @@ class SharedViewModel:ViewModel() {
         val soldItems: Int = 0
         var mySales = MutableLiveData<List<Order>>()
         var myOrders = MutableLiveData<List<Order>>()
+        var selectedUsername:String = ""
 }
