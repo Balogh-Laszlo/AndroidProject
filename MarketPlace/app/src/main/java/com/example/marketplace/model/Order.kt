@@ -22,7 +22,7 @@ data class OrderResponse(val creation:String,
 @JsonClass(generateAdapter = true)
 data class Order(val order_id: String = "",
                  val username: String = "",
-                 val status: String = "",
+                 var status: String = "",
                  val owner_username: String = "",
                  val price_per_unit: String = "",
                  val units: String = "",
@@ -42,6 +42,24 @@ data class GetOrderResponse(val item_count: Int,
 enum class OrderScreen{
     OngoingOrders, OngoingSales
 }
+
+@JsonClass(generateAdapter = true)
+data class SaleResponse(
+    val _id: String,
+    val order_id: String,
+    val username: String,
+    val price_per_unit: String,
+    val units: String,
+    val description: String,
+    val title: String,
+    val images: List<Image> = listOf(),
+    val creation_time: Long,
+    val __v: Int,
+    val status: String
+)
+
+@JsonClass(generateAdapter = true)
+data class UpdateSaleResponse(val updated_item: SaleResponse)
 
 
 

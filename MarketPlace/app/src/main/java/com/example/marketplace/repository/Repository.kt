@@ -2,6 +2,8 @@ package com.example.marketplace.repository
 
 import com.example.marketplace.api.RetrofitInstance
 import com.example.marketplace.model.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 class Repository {
     suspend fun login(request: LoginRequest): LoginResponse {
@@ -31,6 +33,9 @@ class Repository {
     }
     suspend fun getOrders(filter: String,token: String): GetOrderResponse{
         return RetrofitInstance.api.getOrders(token,1000,filter)
+    }
+    suspend fun updateSale(token:String, order_id:String, status:String): UpdateSaleResponse{
+        return RetrofitInstance.api.updateSale(token, order_id, status)
     }
 
 }

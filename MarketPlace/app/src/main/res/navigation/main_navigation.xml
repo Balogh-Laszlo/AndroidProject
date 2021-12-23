@@ -78,4 +78,14 @@
         android:name="com.example.marketplace.fragments.Sales"
         android:label="fragment_sales"
         tools:layout="@layout/fragment_sales" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.marketplace.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/ownersProfileFragment"
+        android:name="com.example.marketplace.fragments.OwnersProfileFragment"
+        android:label="fragment_owners_profile"
+        tools:layout="@layout/fragment_owners_profile" />
 </navigation>

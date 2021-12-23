@@ -29,7 +29,7 @@ class Orders : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_orders, container, false)
         rvOrders = view.findViewById(R.id.rvOrders)
-        adapter = OrderAdapter(requireContext(), listOf(),OrderScreen.OngoingOrders)
+        adapter = OrderAdapter(requireContext(), listOf(),OrderScreen.OngoingOrders,null)
         rvOrders.adapter = adapter
         rvOrders.layoutManager = LinearLayoutManager(context)
         sharedViewModel.myOrders.observe(viewLifecycleOwner){

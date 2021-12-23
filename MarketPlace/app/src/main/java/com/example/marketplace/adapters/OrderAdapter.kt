@@ -2,10 +2,12 @@ package com.example.marketplace.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.persistableBundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,9 +17,12 @@ import com.example.marketplace.model.OrderScreen
 import java.sql.Timestamp
 import java.util.*
 
-class OrderAdapter(val context: Context, var orders:List<Order>,val  screen: OrderScreen): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
-
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+class OrderAdapter(val context: Context, var orders:List<Order>,val  screen: OrderScreen, val listener: OnItemSelected?): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+    interface OnItemSelected{
+        fun onItemSelected(position: Int, status:String)
+    }
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
+        AdapterView.OnItemSelectedListener {
         val tvUserName = itemView.findViewById<TextView>(R.id.tvUserNameOrders)
         val ivUserPhoto = itemView.findViewById<ImageView>(R.id.ivUserPhotoOrders)
         val tvDate = itemView.findViewById<TextView>(R.id.tvDateOrders)
@@ -116,7 +121,27 @@ class OrderAdapter(val context: Context, var orders:List<Order>,val  screen: Ord
                 else -> 4
             }
             tvStatus.text = statusTypes[id]
+            spStatus.onItemSelectedListener = this
+        }
 
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            Log.d("xxx","OnItemSelected")
+            var status = when(p2){
+                0 -> "OPEN"
+                1 -> "ACCEPTED"
+                2 -> "DECLINED"
+                3 -> "DELIVERING"
+                else -> "DELIVERED"
+            }
+            val statusTypes = context.resources.getStringArray(R.array.StatusType)
+
+//            orders[position].status = status
+            Log.d("xxx","Status"+ status +"OnItemSelected"+orders[position].toString())
+            tvStatus.text = statusTypes[p2]
+            listener?.onItemSelected(position, status)
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
         }
 
     }

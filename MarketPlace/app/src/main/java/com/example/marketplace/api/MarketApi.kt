@@ -3,6 +3,8 @@ package com.example.marketplace.api
 import android.provider.SyncStateContract
 import com.example.marketplace.model.*
 import com.example.marketplace.utils.Constants
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.http.*
 
 interface MarketApi {
@@ -50,5 +52,11 @@ interface MarketApi {
                          ) : OrderResponse
     @GET(Constants.GET_ORDERS_URL)
     suspend fun getOrders(@Header("token") token:String, @Header("limit") limit: Int, @Header("filter") filter: String) : GetOrderResponse
+
+    @POST(Constants.UPDATE_SALE_URL)
+    suspend fun updateSale(@Header("token") token:String,
+                           @Query("order_id") order_id:String,
+                           @Body status:String
+                           ): UpdateSaleResponse
 
 }
