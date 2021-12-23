@@ -52,4 +52,5 @@
     <string name="send_my_order">Send my order</string>
     <string name="amount">Amount:</string>
     <string name="price">Price:</string>
+    <string name="save">Save</string>
 </resources>

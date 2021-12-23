@@ -17,5 +17,6 @@
         android:id="@+id/profileMenu"
         android:icon="@drawable/avdefault_avatar"
         android:title="Item"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.ImageButton" />
 </menu>

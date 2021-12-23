@@ -8,4 +8,9 @@
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
     </style>
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#00B5C0</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
 </resources>
